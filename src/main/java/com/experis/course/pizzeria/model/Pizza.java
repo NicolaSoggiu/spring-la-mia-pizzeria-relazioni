@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -36,6 +38,9 @@ public class Pizza {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<OfferteSpeciali> offerteSpecialiList = new ArrayList<>();
 
     // GETTER E SETTER
 
@@ -86,5 +91,13 @@ public class Pizza {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<OfferteSpeciali> getOfferteSpecialiList() {
+        return offerteSpecialiList;
+    }
+
+    public void setOfferteSpecialiList(List<OfferteSpeciali> offerteSpecialiList) {
+        this.offerteSpecialiList = offerteSpecialiList;
     }
 }
