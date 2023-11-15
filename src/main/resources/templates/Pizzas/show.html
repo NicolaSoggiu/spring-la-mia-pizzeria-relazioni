@@ -15,6 +15,31 @@
             </div>
         </div>
     </div>
+
+    <section>
+        <h2>Offerte attive
+            <a th:href="@{/offers/create(pizzaId=*{id})}">
+                <i class="fa-solid fa-circle-plus"></i>
+            </a>
+        </h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Offer Title</th>
+                <th>Start offer</th>
+                <th>End offer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offer : *{offers}" th:object="${offer}">
+                <th th:text="*{title}"></th>
+                <th th:text="*{startDate}"></th>
+                <th th:text="*{endDate}"></th>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
     <div class="mt-2">
         <a th:href="@{/pizzas}" class="btn btn-primary">Back to list</a>
     </div>

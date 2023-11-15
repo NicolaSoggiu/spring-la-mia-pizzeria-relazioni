@@ -40,7 +40,7 @@ public class Pizza {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "pizza")
-    private List<OfferteSpeciali> offerteSpecialiList = new ArrayList<>();
+    private List<Offer> offerList = new ArrayList<>();
 
     // GETTER E SETTER
 
@@ -93,11 +93,11 @@ public class Pizza {
         this.createdAt = createdAt;
     }
 
-    public List<OfferteSpeciali> getOfferteSpecialiList() {
-        return offerteSpecialiList;
+    public List<Offer> getOfferteSpecialiList() {
+        return offerList;
     }
 
-    public void setOfferteSpecialiList(List<OfferteSpeciali> offerteSpecialiList) {
-        this.offerteSpecialiList = offerteSpecialiList;
+    public void setOfferteSpecialiList(List<Offer> offerList) {
+        this.offerList = offerList;
     }
 }

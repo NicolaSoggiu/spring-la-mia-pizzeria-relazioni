@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-public class OfferteSpeciali {
+public class Offer {
 
     // ATTRIBUTI
     @Id
