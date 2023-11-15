@@ -1,5 +1,6 @@
 package com.experis.course.pizzeria.service;
 
+import com.experis.course.pizzeria.exception.OfferNotFoundException;
 import com.experis.course.pizzeria.exception.PizzaNotFoundException;
 import com.experis.course.pizzeria.model.Offer;
 import com.experis.course.pizzeria.model.Pizza;
@@ -32,8 +33,8 @@ public class OfferService {
         return offerRepository.save(offer);
     }
 
-    public Offer getDeal(Integer id) throws RuntimeException {
+    public Offer getDeal(Integer id) throws OfferNotFoundException {
         return offerRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Deal with id " + id + " not found"));
+                .orElseThrow(() -> new OfferNotFoundException("Deal with id " + id + " not found"));
     }
 }
