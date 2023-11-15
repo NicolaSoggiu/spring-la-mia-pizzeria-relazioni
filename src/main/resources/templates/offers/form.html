@@ -4,8 +4,24 @@
 <body>
 <nav th:replace="~{fragments/navbar :: topNavbar('pizzas')}"></nav>
 <div class="container">
-    <h1>Crea Pizza</h1>
+
     <hr>
+    <form
+            th:action="@{/offers/create}"
+            method="POST"
+            id="offer-form"
+            th:object="${offer}"
+            class="row"
+    >
+        <input type="hidden" th:field="*{pizza}">
+        <div class="col-12" th:insert="~{fragments/components :: formField('text', 'Offer title', 'title')}"></div>
+        <div class="col-6" th:insert="~{fragments/components :: formField('date', 'Start date', 'startDate')}"></div>
+        <div class="col-6" th:insert="~{fragments/components :: formField('date', 'End date', 'endDate')}"></div>
+        <div class="col-12 mt-4">
+            <button class="btn btn-primary" type="submit">Salva</button>
+            <a th:href="@{/pizzas}" class="btn btn-primary">Torna indietro</a>
+        </div>
+    </form>
 </div>
 </body>
 </html>

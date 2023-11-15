@@ -32,9 +32,9 @@
             </thead>
             <tbody>
             <tr th:each="offer : *{offers}" th:object="${offer}">
-                <th th:text="*{title}"></th>
-                <th th:text="*{startDate}"></th>
-                <th th:text="*{endDate}"></th>
+                <td th:text="*{title}"></td>
+                <td th:text="*{startDate}"></td>
+                <td th:text="*{endDate}"></td>
             </tr>
             </tbody>
         </table>

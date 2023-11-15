@@ -3,6 +3,7 @@ package com.experis.course.pizzeria.controller;
 import com.experis.course.pizzeria.exception.NameUniqueException;
 import com.experis.course.pizzeria.exception.PizzaNotFoundException;
 import com.experis.course.pizzeria.model.Pizza;
+import com.experis.course.pizzeria.service.OfferService;
 import com.experis.course.pizzeria.service.PizzaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class PizzaController {
 
     @Autowired
     private PizzaService pizzaService;
+    @Autowired
+    private OfferService offerService;
 
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
