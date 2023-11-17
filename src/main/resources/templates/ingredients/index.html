@@ -1,13 +1,25 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ingredients</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="fragments/resources :: headResources('Ingredients List')"></head>
 <body>
-<h1>Ingredients List</h1>
+<nav th:replace="fragments/navbar :: topNavbar('ingredients')"></nav>
+<div class="container">
+    <div th:if="${message !=null}" class="alert alert-success alert-dismissible fade show my-3">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="align-items-center justify-content-between">
+        <h1 class="my-3">Ingredients List</h1>
+        <section>
+            <ul class="list-group">
+                <li
+                        th:each="ingredient : ${ingredientList}"
+                        th:text="${ingredient.name}"
+                        class="list-group-item"
+                ></li>
+            </ul>
+        </section>
+    </div>
+</div>
 </body>
 </html>
