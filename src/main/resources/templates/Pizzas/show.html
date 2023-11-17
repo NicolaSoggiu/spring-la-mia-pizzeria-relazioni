@@ -16,6 +16,13 @@
         </div>
     </div>
 
+    <section>
+        <h3>Ingredient</h3>
+        <ul class="list-group">
+            <li th:each="ingredient : ${pizza.ingredients}" class="list-group-item" th:text="${ingredient.name}"></li>
+        </ul>
+    </section>
+
     <h2>Offerte attive
         <a th:href="@{/offers/create(pizzaId=${pizza.id})}">
             <i class="fa-solid fa-circle-plus"></i>
@@ -38,12 +45,6 @@
         </tbody>
     </table>
 
-    <section>
-        <h3>Ingredient</h3>
-        <ul class="list-group">
-            <li th:each="ingredient : ${ingredientList}" class="list-group-item"></li>
-        </ul>
-    </section>
     <div th:if="*{offers.size() == 0}" class="alert alert-info">The list is empty</div>
 
     <div class="mt-2">
