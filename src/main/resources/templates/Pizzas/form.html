@@ -15,19 +15,32 @@
             th:object="${pizza}"
             class="row gy-2"
     >
-        <div class="col-4" th:insert="fragments/components :: formField('text', 'Name', 'name')"></div>
-        <div class="col-4" th:insert="fragments/components :: formField('number', 'Price', 'price')"></div>
-        <div class="col-4" th:insert="fragments/components :: formField('text', 'Url Image', 'image')"></div>
         <div class="col-8">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" th:field="*{description}" rows="6"
-                      th:errorClass="is-invalid"></textarea>
-            <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
-                <ul>
-                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-                </ul>
+            <div class="col-4" th:insert="fragments/components :: formField('text', 'Name', 'name')"></div>
+            <div class="col-4" th:insert="fragments/components :: formField('number', 'Price', 'price')"></div>
+            <div class="col-4" th:insert="fragments/components :: formField('text', 'Url Image', 'image')"></div>
+            <div class="col-8">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="6"
+                          th:errorClass="is-invalid"></textarea>
+                <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                    </ul>
+                </div>
             </div>
         </div>
+
+        <div class="col-4">
+            <h4>Ingredients</h4>
+            <div th:each="ingredient : ${ingredientList}">
+                <input type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:name="ingredients"
+                       th:value="${ingredient.id}"
+                       th:checked="${selectedIngredients != null and #lists.contains(selectedIngredients, ingredient)}">
+                <label th:for="${'ingredient-' + ingredient.id}" th:text="${ingredient.name}"></label>
+            </div>
+        </div>
+
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Save</button>
             <a th:href="@{/pizzas}" class="btn btn-primary">Cancel</a>

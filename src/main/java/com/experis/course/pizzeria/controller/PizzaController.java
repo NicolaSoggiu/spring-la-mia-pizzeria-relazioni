@@ -3,6 +3,7 @@ package com.experis.course.pizzeria.controller;
 import com.experis.course.pizzeria.exception.NameUniqueException;
 import com.experis.course.pizzeria.exception.PizzaNotFoundException;
 import com.experis.course.pizzeria.model.Pizza;
+import com.experis.course.pizzeria.service.IngredientService;
 import com.experis.course.pizzeria.service.OfferService;
 import com.experis.course.pizzeria.service.PizzaService;
 import jakarta.validation.Valid;
@@ -27,6 +28,9 @@ public class PizzaController {
     @Autowired
     private OfferService offerService;
 
+    @Autowired
+    private IngredientService ingredientService;
+
     @GetMapping
     public String index(@RequestParam Optional<String> search, Model model) {
         model.addAttribute("pizzaList", pizzaService.getPizzaList(search));
@@ -47,12 +51,14 @@ public class PizzaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredientList", ingredientService.getAll());
         return "pizzas/form";
     }
 
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/form";
         }
         try {
@@ -70,6 +76,7 @@ public class PizzaController {
     public String edit(@PathVariable Integer id, Model model) {
         try {
             model.addAttribute("pizza", pizzaService.getPizzaById(id));
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/form";
         } catch (PizzaNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -77,8 +84,9 @@ public class PizzaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "pizzas/form";
         }
         try {
